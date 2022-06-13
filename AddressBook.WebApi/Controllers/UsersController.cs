@@ -22,7 +22,7 @@ namespace AddressBook.WebApi.Controllers
         }
 
         [HttpPost("auth")]
-        public async Task<ActionResult<Token>> Authenticate(Auth paylod)
+        public async Task<ActionResult<TokenModel>> Authenticate(AuthModel paylod)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace AddressBook.WebApi.Controllers
                 if (user == null)
                     return Unauthorized();
 
-                Token token = this._authService.GenerateJwtToken(user);
+                TokenModel token = this._authService.GenerateJwtToken(user);
 
                 if (token == null || string.IsNullOrWhiteSpace(token.AccessToken))
                     return Unauthorized();
