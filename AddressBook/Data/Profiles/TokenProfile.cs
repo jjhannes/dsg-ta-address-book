@@ -2,7 +2,7 @@
 using AddressBook.Api.Models;
 using AutoMapper;
 
-namespace AddressBook.Api.Profiles
+namespace AddressBook.Data.Profiles
 {
     public class TokenProfile : Profile
     {

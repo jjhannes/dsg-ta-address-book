@@ -2,7 +2,7 @@
 using AddressBook.Api.Models;
 using AutoMapper;
 
-namespace AddressBook.Api.Profiles
+namespace AddressBook.Data.Profiles
 {
     public class ClientProfile : Profile
     {
@@ -11,6 +11,9 @@ namespace AddressBook.Api.Profiles
             this.CreateMap<Client, ClientModel>()
                 //.ForMember(c => c.Id, o => o.Ignore())
                 .ReverseMap();
+
+            // Necessary for MVC project which deals with entities directly
+            this.CreateMap<Client, Client>();
         }
     }
 }

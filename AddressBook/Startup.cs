@@ -27,11 +27,11 @@ namespace AddressBook
             services.AddScoped<IUsersRepo, Data.Repos.Mock.UserRepo>();
             services.AddScoped<IClientRepo, Data.Repos.Mock.ClientRepo>();
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
             services.Configure<AppSettings>(this._config.GetSection("AppSettings"));
 
             services.AddTransient(typeof(AuthService));
+            
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddHttpContextAccessor();
             services.AddSession();
