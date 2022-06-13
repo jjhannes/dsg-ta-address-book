@@ -8,7 +8,7 @@ namespace AddressBook.WebApi.Profiles
     {
         public TokenProfile()
         {
-            this.CreateMap<User, Token>();
+            this.CreateMap<User, TokenModel>();
         }
     }
 }

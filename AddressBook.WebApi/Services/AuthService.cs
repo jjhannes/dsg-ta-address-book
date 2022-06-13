@@ -25,7 +25,7 @@ namespace AddressBook.WebApi.Services
             this._mapper = mapper;
         }
 
-        public Token GenerateJwtToken(User user)
+        public TokenModel GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this._appSettings.Secret);
@@ -39,8 +39,8 @@ namespace AddressBook.WebApi.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             string tokenValue = tokenHandler.WriteToken(token);
 
-            Token authToken = this._mapper.Map<Token>(user, options =>
-                options.AfterMap((object s, Token t) => t.AccessToken = tokenValue));
+            TokenModel authToken = this._mapper.Map<TokenModel>(user, options =>
+                options.AfterMap((object s, TokenModel t) => t.AccessToken = tokenValue));
 
             return authToken;
         }
