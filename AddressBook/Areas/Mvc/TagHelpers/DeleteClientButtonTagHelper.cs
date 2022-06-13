@@ -23,7 +23,7 @@ namespace AddressBook.Areas.Mvc.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string deleteRoute = UrlHelperExtensions.Action(this.UrlHelper, "Delete", "ClientList", new { id = this.Client.Id });
+            string deleteRoute = UrlHelperExtensions.Action(this.UrlHelper, "Delete", "Clients", new { id = this.Client.Id });
             var jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
             {
                 Name = this.Client.Name,

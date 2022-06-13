@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 namespace AddressBook.Areas.Mvc.Controllers
 {
     [Area("Mvc")]
-    public class ClientListController : Controller
+    public class ClientsController : Controller
     {
         private readonly IClientRepo _clientRepo;
 
-        public ClientListController(IClientRepo clientRepo)
+        public ClientsController(IClientRepo clientRepo)
         {
             this._clientRepo = clientRepo;
         }
 
-        public async Task<ViewResult> Index()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<Client> clients = await this._clientRepo.GetAll();
 
-            return View(clients.OrderBy(c => c.Name));
+            return View("Index", clients.OrderBy(c => c.Name));
         }
 
-        //public async Task<ViewResult> Details(int id)
-        //{
-        //    Client client = await this._clientRepo.GetById(id);
+        public async Task<IActionResult> Details(int id)
+        {
+            Client client = await this._clientRepo.GetById(id);
 
-        //    return View("ClientDetails", client);
-        //}
+            return View("Details", client);
+        }
 
         public async Task<RedirectToActionResult> Delete(int id)
         {
