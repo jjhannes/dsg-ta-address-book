@@ -1,16 +1,10 @@
+using AddressBook.WebApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AddressBook.WebApi
 {
@@ -20,11 +14,14 @@ namespace AddressBook.WebApi
 
         public Startup(IConfiguration config)
         {
-            _config = config;
+            this._config = config;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AddressBookDBContext>();
+            services.AddScoped<IUsersRepo, Data.Repos.Mock.UserRepo>();
+            services.AddScoped<IClientRepo, Data.Repos.Mock.ClientRepo>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -46,6 +43,7 @@ namespace AddressBook.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

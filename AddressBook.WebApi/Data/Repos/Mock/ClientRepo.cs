@@ -1,5 +1,4 @@
 ﻿using AddressBook.WebApi.Data.Entities;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,16 +37,16 @@ namespace AddressBook.WebApi.Data.Repos.Mock
             };
         }
 
-        public async Task<IEnumerable<Client>> GetAll() => 
+        public async Task<IEnumerable<Client>> GetAll() =>
             await Task.FromResult(this._clients);
 
         public async Task<Client> GetByEmail(string email) =>
             await Task.FromResult(this._clients.FirstOrDefault(c => c.Email == email));
 
-        public async Task<Client> GetById(int id) => 
+        public async Task<Client> GetById(int id) =>
             await Task.FromResult(this._clients.FirstOrDefault(c => c.Id == id));
 
-        public async Task<bool> SaveChanges() => 
+        public async Task<bool> SaveChanges() =>
             await Task.FromResult(true);
     }
 }

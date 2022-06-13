@@ -1,5 +1,6 @@
 ﻿using AddressBook.WebApi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,20 +23,26 @@ namespace AddressBook.WebApi.Data.Repos.Mock
             };
         }
 
-        public async Task<bool> Authenticate(string username, string password)
+#nullable enable
+        public async Task<User?> Authenticate(string username, string password)
         {
             // Fetch user details
-            User user = this._users.FirstOrDefault(u => u.Username == username);
+            User? user = this._users.FirstOrDefault(u => u.Username == username);
 
             if (user == null)
-                return await Task.FromResult(false);
+                return await Task.FromResult<User?>(null);
 
             // Encrypt incoming password
             string encryptedPassword = password;
 
             // Compare with encrypted password
-            return await Task.FromResult(password == encryptedPassword);
+            if (password == user.Password)
+                return await Task.FromResult(user);
+
+            else
+                return await Task.FromResult<User?>(null);
         }
+#nullable disable
 
         public async Task<User> GetDetails(string username) =>
             await Task.FromResult(this._users.FirstOrDefault(u => u.Username == username));
