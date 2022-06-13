@@ -2,7 +2,7 @@
 
 namespace AddressBook.WebApi.Data.Models
 {
-    public class Auth
+    public class AuthModel
     {
         [Required]
         public string Username { get; set; }

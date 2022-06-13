@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AddressBook.WebApi.Data.Models
 {
-    public class Token
+    public class TokenModel
     {
         public string Username { get; set; }
 
