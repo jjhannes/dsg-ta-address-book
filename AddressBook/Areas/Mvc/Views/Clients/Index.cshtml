@@ -139,6 +139,7 @@
                 <delete-client-button client=@client url-helper=@this.Url></delete-client-button>
 
                 <a class="btn btn-outline-primary btn-sm float-end" type="submit"
+                    asp-controller="Clients"
                     asp-action="Details"
                     asp-route-id="@client.Id">
                     
