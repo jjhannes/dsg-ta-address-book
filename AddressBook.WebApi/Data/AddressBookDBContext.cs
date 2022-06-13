@@ -1,7 +1,7 @@
-﻿using AddressBook.WebApi.Data.Entities;
+﻿using AddressBook.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AddressBook.WebApi.Data
+namespace AddressBook.Data
 {
     public class AddressBookDBContext : DbContext
     {

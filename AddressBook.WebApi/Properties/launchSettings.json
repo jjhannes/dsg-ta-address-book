@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AddressBook.WebApi": {
+    "AddressBook": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

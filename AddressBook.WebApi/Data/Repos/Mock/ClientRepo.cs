@@ -1,10 +1,10 @@
-﻿using AddressBook.WebApi.Data.Entities;
+﻿using AddressBook.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Data.Repos.Mock
+namespace AddressBook.Data.Repos.Mock
 {
     public class ClientRepo : IClientRepo
     {

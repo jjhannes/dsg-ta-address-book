@@ -1,8 +1,8 @@
-﻿using AddressBook.WebApi.Data.Entities;
-using AddressBook.WebApi.Data.Models;
+﻿using AddressBook.Data.Entities;
+using AddressBook.Api.Models;
 using AutoMapper;
 
-namespace AddressBook.WebApi.Profiles
+namespace AddressBook.Api.Profiles
 {
     public class ClientProfile : Profile
     {

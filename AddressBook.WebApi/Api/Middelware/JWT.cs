@@ -1,5 +1,5 @@
-﻿using AddressBook.WebApi.Data;
-using AddressBook.WebApi.Settings;
+﻿using AddressBook.Data;
+using AddressBook.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Middelware
+namespace AddressBook.Api.Middelware
 {
     public class JWT
     {

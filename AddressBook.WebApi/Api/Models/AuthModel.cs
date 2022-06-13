@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AddressBook.WebApi.Data.Models
+namespace AddressBook.Api.Models
 {
     public class AuthModel
     {

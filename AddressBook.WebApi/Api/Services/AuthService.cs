@@ -1,18 +1,15 @@
-﻿using AddressBook.WebApi.Data.Entities;
-using AddressBook.WebApi.Data.Models;
-using AddressBook.WebApi.Settings;
+﻿using AddressBook.Api.Models;
+using AddressBook.Data.Entities;
+using AddressBook.Settings;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Services
+namespace AddressBook.Api.Services
 {
     public class AuthService
     {

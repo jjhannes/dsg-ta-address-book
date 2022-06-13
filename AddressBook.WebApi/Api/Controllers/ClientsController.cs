@@ -1,7 +1,7 @@
-﻿using AddressBook.WebApi.Attributes;
-using AddressBook.WebApi.Data;
-using AddressBook.WebApi.Data.Entities;
-using AddressBook.WebApi.Data.Models;
+﻿using AddressBook.Api.Attributes;
+using AddressBook.Data;
+using AddressBook.Data.Entities;
+using AddressBook.Api.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Controllers
+namespace AddressBook.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

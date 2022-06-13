@@ -1,12 +1,12 @@
-﻿using AddressBook.WebApi.Data;
-using AddressBook.WebApi.Data.Entities;
-using AddressBook.WebApi.Data.Models;
+﻿using AddressBook.Data;
+using AddressBook.Data.Entities;
+using AddressBook.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Controllers
+namespace AddressBook.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

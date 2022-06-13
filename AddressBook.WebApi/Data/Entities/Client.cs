@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AddressBook.WebApi.Data.Entities
+namespace AddressBook.Data.Entities
 {
     [Index(nameof(Email), IsUnique = true)]
     public class Client

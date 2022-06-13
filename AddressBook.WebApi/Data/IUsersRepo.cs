@@ -1,7 +1,7 @@
-﻿using AddressBook.WebApi.Data.Entities;
+﻿using AddressBook.Data.Entities;
 using System.Threading.Tasks;
 
-namespace AddressBook.WebApi.Data
+namespace AddressBook.Data
 {
     public interface IUsersRepo
     {

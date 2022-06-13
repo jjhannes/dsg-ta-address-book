@@ -1,7 +1,7 @@
-using AddressBook.WebApi.Data;
-using AddressBook.WebApi.Middelware;
-using AddressBook.WebApi.Services;
-using AddressBook.WebApi.Settings;
+using AddressBook.Data;
+using AddressBook.Api.Middelware;
+using AddressBook.Api.Services;
+using AddressBook.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace AddressBook.WebApi
+namespace AddressBook
 {
     public class Startup
     {
@@ -37,7 +37,7 @@ namespace AddressBook.WebApi
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AddressBook.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AddressBook", Version = "v1" });
             });
         }
 
@@ -47,7 +47,7 @@ namespace AddressBook.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AddressBook.WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AddressBook v1"));
             }
 
             app.UseHttpsRedirection();

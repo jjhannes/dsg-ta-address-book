@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace AddressBook.WebApi.Data.Entities
+namespace AddressBook.Data.Entities
 {
     public class User
     {

@@ -1,10 +1,10 @@
-﻿using AddressBook.WebApi.Data.Entities;
+﻿using AddressBook.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
-namespace AddressBook.WebApi.Attributes
+namespace AddressBook.Api.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter

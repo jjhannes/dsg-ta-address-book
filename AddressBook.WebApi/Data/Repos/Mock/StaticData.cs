@@ -1,8 +1,8 @@
-﻿using AddressBook.WebApi.Data.Entities;
+﻿using AddressBook.Data.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace AddressBook.WebApi.Data.Repos.Mock
+namespace AddressBook.Data.Repos.Mock
 {
     public static class StaticData
     {
