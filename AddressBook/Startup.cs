@@ -33,8 +33,14 @@ namespace AddressBook
 
             services.AddTransient(typeof(AuthService));
 
+            services.AddHttpContextAccessor();
+            services.AddSession();
+
             services.AddCors();
+
             services.AddControllers();
+            services.AddControllersWithViews();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AddressBook", Version = "v1" });
@@ -51,6 +57,8 @@ namespace AddressBook
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
@@ -64,6 +72,10 @@ namespace AddressBook
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{area=Mvc}/{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }
