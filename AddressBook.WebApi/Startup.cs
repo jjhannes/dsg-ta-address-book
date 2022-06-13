@@ -23,7 +23,7 @@ namespace AddressBook.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AddressBookDBContext>();
+            //services.AddDbContext<AddressBookDBContext>();
             services.AddScoped<IUsersRepo, Data.Repos.Mock.UserRepo>();
             services.AddScoped<IClientRepo, Data.Repos.Mock.ClientRepo>();
 
@@ -32,7 +32,6 @@ namespace AddressBook.WebApi
             services.Configure<AppSettings>(this._config.GetSection("AppSettings"));
 
             services.AddTransient(typeof(AuthService));
-            //services.AddSingleton(typeof(AuthService));
 
             services.AddCors();
             services.AddControllers();
@@ -60,8 +59,6 @@ namespace AddressBook.WebApi
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
             app.UseMiddleware<JWT>();
 
             app.UseEndpoints(endpoints =>
