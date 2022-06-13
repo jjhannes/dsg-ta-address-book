@@ -145,5 +145,28 @@ namespace AddressBook.WebApi.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, error.Message);
             }
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                Client existingClient = await this._clientRepo.GetById(id);
+
+                if (existingClient == null)
+                    return NotFound("Id doesn't exist.");
+
+                await this._clientRepo.Remove(existingClient);
+
+                if (await this._clientRepo.SaveChanges())
+                    return Ok();
+
+                return BadRequest("Could not remove client.");
+            }
+            catch (Exception error)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, error.Message);
+            }
+        }
     }
 }

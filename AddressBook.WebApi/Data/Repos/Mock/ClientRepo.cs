@@ -40,5 +40,10 @@ namespace AddressBook.WebApi.Data.Repos.Mock
 
             return Task.FromResult(client);
         }
+
+        public async Task Remove(Client client)
+        {
+            await Task.Run(() => this._clients.Remove(client));
+        }
     }
 }

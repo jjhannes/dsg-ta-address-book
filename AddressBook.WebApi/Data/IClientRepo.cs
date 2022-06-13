@@ -14,6 +14,8 @@ namespace AddressBook.WebApi.Data
 
         Task<Client> Create(Client client);
 
+        Task Remove(Client client);
+
         Task<bool> SaveChanges();
     }
 }
