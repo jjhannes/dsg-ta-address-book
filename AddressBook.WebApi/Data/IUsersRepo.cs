@@ -7,6 +7,6 @@ namespace AddressBook.WebApi.Data
     {
         Task<User> Authenticate(string username, string password);
 
-        Task<User> GetDetails(string username);
+        Task<User> GetById(int id);
     }
 }

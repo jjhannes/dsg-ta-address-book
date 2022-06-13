@@ -1,5 +1,6 @@
 ﻿using AddressBook.WebApi.Data;
 using AddressBook.WebApi.Data.Entities;
+using AddressBook.WebApi.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,32 +13,16 @@ namespace AddressBook.WebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersRepo _userRepo;
+        private readonly Services.AuthService _authService;
 
-        public UsersController(IUsersRepo userRepo)
+        public UsersController(IUsersRepo userRepo, Services.AuthService authService)
         {
             this._userRepo = userRepo;
+            this._authService = authService;
         }
 
-        [HttpGet("{email}")]
-        public async Task<ActionResult<User>> Get(string email)
-        {
-            try
-            {
-                User user = await this._userRepo.GetDetails(email);
-
-                if (user == null)
-                    return NotFound();
-
-                return Ok(user);
-            }
-            catch (Exception error)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, error.Message);
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<User>> Authenticate(User paylod)
+        [HttpPost("auth")]
+        public async Task<ActionResult<Token>> Authenticate(Auth paylod)
         {
             try
             {
@@ -49,7 +34,12 @@ namespace AddressBook.WebApi.Controllers
                 if (user == null)
                     return Unauthorized();
 
-                return Ok(user);
+                Token token = this._authService.GenerateJwtToken(user);
+
+                if (token == null || string.IsNullOrWhiteSpace(token.AccessToken))
+                    return Unauthorized();
+
+                return Ok(token);
             }
             catch (Exception error)
             {

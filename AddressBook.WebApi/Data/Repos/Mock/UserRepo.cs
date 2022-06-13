@@ -1,8 +1,13 @@
 ﻿using AddressBook.WebApi.Data.Entities;
-using Microsoft.EntityFrameworkCore;
+using AddressBook.WebApi.Settings;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AddressBook.WebApi.Data.Repos.Mock
@@ -18,6 +23,8 @@ namespace AddressBook.WebApi.Data.Repos.Mock
                 new User
                 {
                     Username = "jj.hannes.swanepoel@gmail.com",
+                    FirstName = "Hannes",
+                    LastName = "Swanepoel",
                     Password = "P@ssw0rd123"
                 }
             };
@@ -32,19 +39,17 @@ namespace AddressBook.WebApi.Data.Repos.Mock
             if (user == null)
                 return await Task.FromResult<User?>(null);
 
-            // Encrypt incoming password
-            string encryptedPassword = password;
-
             // Compare with encrypted password
             if (password == user.Password)
+            {
                 return await Task.FromResult(user);
-
+            }
             else
                 return await Task.FromResult<User?>(null);
         }
 #nullable disable
 
-        public async Task<User> GetDetails(string username) =>
-            await Task.FromResult(this._users.FirstOrDefault(u => u.Username == username));
+        public async Task<User> GetById(int id) =>
+            await Task.FromResult(this._users.FirstOrDefault(u => u.Id == id));
     }
 }

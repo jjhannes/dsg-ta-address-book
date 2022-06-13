@@ -1,10 +1,14 @@
 using AddressBook.WebApi.Data;
+using AddressBook.WebApi.Middelware;
+using AddressBook.WebApi.Services;
+using AddressBook.WebApi.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace AddressBook.WebApi
 {
@@ -23,6 +27,14 @@ namespace AddressBook.WebApi
             services.AddScoped<IUsersRepo, Data.Repos.Mock.UserRepo>();
             services.AddScoped<IClientRepo, Data.Repos.Mock.ClientRepo>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.Configure<AppSettings>(this._config.GetSection("AppSettings"));
+
+            services.AddTransient(typeof(AuthService));
+            //services.AddSingleton(typeof(AuthService));
+
+            services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -43,8 +55,14 @@ namespace AddressBook.WebApi
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+            app.UseMiddleware<JWT>();
 
             app.UseEndpoints(endpoints =>
             {

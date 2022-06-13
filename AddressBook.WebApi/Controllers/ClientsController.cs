@@ -1,4 +1,5 @@
-﻿using AddressBook.WebApi.Data;
+﻿using AddressBook.WebApi.Attributes;
+using AddressBook.WebApi.Data;
 using AddressBook.WebApi.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace AddressBook.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientsController : ControllerBase
     {
         private readonly IClientRepo _clientRepo;
