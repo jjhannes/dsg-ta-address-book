@@ -55,7 +55,7 @@ namespace AddressBook.WebApi.Controllers
         }
 
         [HttpGet("{email}")]
-        public async Task<ActionResult<IEnumerable<Client>>> Get(string email)
+        public async Task<ActionResult<Client>> Get(string email)
         {
             try
             {
