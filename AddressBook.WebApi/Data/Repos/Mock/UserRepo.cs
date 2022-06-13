@@ -1,33 +1,17 @@
 ﻿using AddressBook.WebApi.Data.Entities;
-using AddressBook.WebApi.Settings;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AddressBook.WebApi.Data.Repos.Mock
 {
     public class UserRepo : IUsersRepo
     {
-        private readonly List<User> _users;
+        private List<User> _users;
 
         public UserRepo()
         {
-            this._users = new List<User>
-            {
-                new User
-                {
-                    Username = "jj.hannes.swanepoel@gmail.com",
-                    FirstName = "Hannes",
-                    LastName = "Swanepoel",
-                    Password = "P@ssw0rd123"
-                }
-            };
+            this._users = StaticData.Users;
         }
 
 #nullable enable

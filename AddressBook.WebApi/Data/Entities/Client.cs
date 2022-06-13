@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AddressBook.WebApi.Data.Entities
 {
+    [Index(nameof(Email), IsUnique = true)]
     public class Client
     {
         public int Id { get; set; }

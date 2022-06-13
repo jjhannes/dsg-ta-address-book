@@ -8,33 +8,11 @@ namespace AddressBook.WebApi.Data.Repos.Mock
 {
     public class ClientRepo : IClientRepo
     {
-        private readonly List<Client> _clients;
+        private List<Client> _clients;
 
         public ClientRepo()
         {
-            this._clients = new List<Client>
-            {
-                new Client
-                {
-                    Id = 1,
-                    Name = "Jack",
-                    Surname = "Sparrow",
-                    Company = "Black Pearl",
-                    ContactNumber = "0105555225",
-                    Email = "jack.sparrow@black-pearl.ss",
-                    Created = new DateTime(1860, 5, 13)
-                },
-                new Client
-                {
-                    Id = 1,
-                    Name = "Mike",
-                    Surname = "Tyson",
-                    Company = "Pro Boxing",
-                    ContactNumber = "0105556453",
-                    Email = "mike.tyson@pro-box.usa",
-                    Created = new DateTime(1966, 6, 30)
-                }
-            };
+            this._clients = StaticData.Clients;
         }
 
         public async Task<IEnumerable<Client>> GetAll() =>
@@ -48,5 +26,19 @@ namespace AddressBook.WebApi.Data.Repos.Mock
 
         public async Task<bool> SaveChanges() =>
             await Task.FromResult(true);
+
+        public Task<Client> Create(Client client)
+        {
+            int lastId = this._clients
+                .OrderBy(c => c.Id)
+                .Last()
+                .Id;
+
+            client.Id = lastId + 1;
+
+            this._clients.Add(client);
+
+            return Task.FromResult(client);
+        }
     }
 }

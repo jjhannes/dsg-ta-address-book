@@ -12,6 +12,8 @@ namespace AddressBook.WebApi.Data
 
         Task<Client> GetByEmail(string id);
 
+        Task<Client> Create(Client client);
+
         Task<bool> SaveChanges();
     }
 }

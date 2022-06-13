@@ -71,5 +71,23 @@ namespace AddressBook.WebApi.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, error.Message);
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Client>> Post(Client client)
+        {
+            try
+            {
+                Client newClient = await this._clientRepo.Create(client);
+
+                if (await this._clientRepo.SaveChanges())
+                    return Ok(newClient);
+
+                return BadRequest();
+            }
+            catch (Exception error)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, error.Message);
+            }
+        }
     }
 }
