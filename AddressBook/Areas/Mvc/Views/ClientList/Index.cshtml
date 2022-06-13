@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Client>
+
+<div class="modal" tabindex="-1" id="confirmDeleteModal">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">Modal title</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <p id="confirmModalBody">Are you sure you want to delete the following client?</p>
+        <p><b>Name: </b><span id="deleteModalName"></span></p>
+        <p><b>Surname: </b><span id="deleteModalSurname"></span></p>
+        <p><b>Email: </b><span id="deleteModalEmail"><span></p>
+        <p><b>Contact Number: </b><span id="deleteModalContactNumber"></span></p>
+        <p><b>Company: </b><span id="deleteModalCompany"></span></p>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            
+            Cancel
+            
+        </button>
+
+        <a type="button" class="btn btn-outline-danger" id="deleteModalConfirm">
+            
+            Delete
+            
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<h3>Client List</h3>
+
+<p class="lead">
+
+    Manage client contact information, search, import and export
+
+</p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="container-fluid">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <form class="d-flex">
+
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+
+      </form>
+      
+      <form class="d-flex ms-auto">
+
+        <button class="btn btn-outline-secondary me-2" type="submit">Export</button>
+        <button class="btn btn-outline-secondary" type="submit">Import</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</nav>
+
+<table class="table table-hover">
+
+    <thead>
+
+        <tr>
+            
+            <td>Name</td>
+            <td>Surname</td>
+            <td>Email</td>
+            <td>Contact Number</td>
+            <td>Company</td>
+            <td></td>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    @foreach (Client client in Model)
+    {       
+        <tr>
+
+            <td>
+
+                @client.Name
+
+            </td>
+            
+            <td>
+
+                @client.Surname
+
+            </td>
+            
+            <td>
+
+                @client.Email
+
+            </td>
+            
+            <td>
+
+                @client.ContactNumber
+
+            </td>
+            
+            <td>
+
+                @client.Company
+
+            </td>
+
+            <td>
+                
+                <delete-client-button client=@client url-helper=@this.Url></delete-client-button>
+
+                <a class="btn btn-outline-primary btn-sm float-end" type="submit">
+                    
+                    Edit
+                    
+                </a>
+
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>
