@@ -1,49 +1,49 @@
-﻿@model IEnumerable<Client>
+﻿@model ClientsViewModel
 
 <div class="modal" tabindex="-1" id="confirmDeleteModal">
 
-  <div class="modal-dialog">
+    <div class="modal-dialog">
 
-    <div class="modal-content">
+        <div class="modal-content">
 
-      <div class="modal-header">
+            <div class="modal-header">
 
-        <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Modal title</h5>
 
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-      </div>
+            </div>
 
-      <div class="modal-body">
+            <div class="modal-body">
 
-        <p id="confirmModalBody">Are you sure you want to delete the following client?</p>
-        <p><b>Name: </b><span id="deleteModalName"></span></p>
-        <p><b>Surname: </b><span id="deleteModalSurname"></span></p>
-        <p><b>Email: </b><span id="deleteModalEmail"></span></p>
-        <p><b>Contact Number: </b><span id="deleteModalContactNumber"></span></p>
-        <p><b>Company: </b><span id="deleteModalCompany"></span></p>
+                <p id="confirmModalBody">Are you sure you want to delete the following client?</p>
+                <p><b>Name: </b><span id="deleteModalName"></span></p>
+                <p><b>Surname: </b><span id="deleteModalSurname"></span></p>
+                <p><b>Email: </b><span id="deleteModalEmail"></span></p>
+                <p><b>Contact Number: </b><span id="deleteModalContactNumber"></span></p>
+                <p><b>Company: </b><span id="deleteModalCompany"></span></p>
 
-      </div>
+            </div>
 
-      <div class="modal-footer">
+            <div class="modal-footer">
 
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-            
-            Cancel
-            
-        </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
 
-        <a class="btn btn-outline-danger" id="deleteModalConfirm">
-            
-            Delete
-            
-        </a>
+                    Cancel
 
-      </div>
+                </button>
+
+                <a class="btn btn-outline-danger" id="deleteModalConfirm">
+
+                    Delete
+
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
-
-  </div>
 
 </div>
 
@@ -57,27 +57,34 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <div class="container-fluid">
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
-      <form class="d-flex">
+    <div class="container-fluid">
 
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      </form>
-      
-      <form class="d-flex ms-auto">
+            @*@await Component.InvokeAsync("ClientSearch")*@
 
-        <button class="btn btn-outline-secondary me-2" type="submit">Export</button>
-        <button class="btn btn-outline-secondary" type="submit">Import</button>
+            <form class="d-flex" method="post" enctype="multipart/form-data"
+                asp-controller="Clients"
+                asp-action="Search">
 
-      </form>
+                <input class="form-control me-2" type="search" placeholder="Search" name="Query" value="@Model.Query">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+
+            </form>
+
+            <form class="d-flex ms-auto">
+
+                <button class="btn btn-outline-secondary me-2" type="submit">Export</button>
+                <a class="btn btn-outline-secondary">Import</a>
+
+                @*<label for="inpImport" class="form-label">Import</label>
+            <input class="form-control form-control-lg" type="file" id="inpImport">*@
+
+            </form>
+
+        </div>
 
     </div>
-
-  </div>
 
 </nav>
 
@@ -86,7 +93,7 @@
     <thead>
 
         <tr>
-            
+
             <td>Name</td>
             <td>Surname</td>
             <td>Email</td>
@@ -100,57 +107,57 @@
 
     <tbody>
 
-    @foreach (Client client in Model)
-    {       
-        <tr>
+        @foreach (Client client in Model.Clients)
+        {
+            <tr>
 
-            <td>
+                <td>
 
-                @client.Name
+                    @client.Name
 
-            </td>
-            
-            <td>
+                </td>
 
-                @client.Surname
+                <td>
 
-            </td>
-            
-            <td>
+                    @client.Surname
 
-                @client.Email
+                </td>
 
-            </td>
-            
-            <td>
+                <td>
 
-                @client.ContactNumber
+                    @client.Email
 
-            </td>
-            
-            <td>
+                </td>
 
-                @client.Company
+                <td>
 
-            </td>
+                    @client.ContactNumber
 
-            <td>
-                
-                <delete-client-button client=@client url-helper=@this.Url></delete-client-button>
+                </td>
 
-                <a class="btn btn-outline-primary btn-sm float-end" type="submit"
-                    asp-controller="Clients"
-                    asp-action="Details"
-                    asp-route-id="@client.Id">
-                    
-                    Edit
-                    
-                </a>
+                <td>
 
-            </td>
+                    @client.Company
 
-        </tr>
-    }
+                </td>
+
+                <td>
+
+                    <delete-client-button client=@client url-helper=@this.Url></delete-client-button>
+
+                    <a class="btn btn-outline-primary btn-sm float-end" type="submit"
+                       asp-controller="Clients"
+                       asp-action="Details"
+                       asp-route-id="@client.Id">
+
+                        Edit
+
+                    </a>
+
+                </td>
+
+            </tr>
+        }
 
     </tbody>
 

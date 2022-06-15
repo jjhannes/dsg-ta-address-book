@@ -1,0 +1,12 @@
+﻿@model ClientsViewModel
+
+@*<form class="d-flex" method="post" enctype="multipart/form-data"
+      asp-controller="Clients"
+      asp-action="Search">*@
+
+<form class="d-flex">
+
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-secondary" type="submit" value="@Model.Query">Search</button>
+
+</form>

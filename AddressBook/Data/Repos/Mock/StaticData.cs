@@ -27,6 +27,36 @@ namespace AddressBook.Data.Repos.Mock
                     ContactNumber = "0105556453",
                     Email = "mike.tyson@pro-box.usa",
                     Created = new DateTime(1966, 6, 30)
+                },
+                new Client
+                {
+                    Id = 3,
+                    Name = "Pope",
+                    Surname = "Francis",
+                    Company = "The Roman Catholic Church",
+                    ContactNumber = "0105557673",
+                    Email = "pope.francis@trcc.ita",
+                    Created = new DateTime(1936, 12, 17)
+                },
+                new Client
+                {
+                    Id = 3,
+                    Name = "Jane",
+                    Surname = "Doe",
+                    Company = "Doe Inc.",
+                    ContactNumber = "0105555263",
+                    Email = "jane.doe@doeinc.io",
+                    Created = new DateTime(1982, 10, 3)
+                },
+                new Client
+                {
+                    Id = 3,
+                    Name = "Cloe",
+                    Surname = "Vermuth",
+                    Company = "Borderlands Records",
+                    ContactNumber = "0105553563",
+                    Email = "cloe.vermuth@blreckords.pda",
+                    Created = new DateTime(2567, 7, 12)
                 }
             };
         public static List<User> Users = new List<User>

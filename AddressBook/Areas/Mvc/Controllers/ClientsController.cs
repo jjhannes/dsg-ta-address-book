@@ -1,4 +1,5 @@
-﻿using AddressBook.Data;
+﻿using AddressBook.Areas.Mvc.ViewModels;
+using AddressBook.Data;
 using AddressBook.Data.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,36 @@ namespace AddressBook.Areas.Mvc.Controllers
         {
             IEnumerable<Client> clients = await this._clientRepo.GetAll();
 
-            return View("Index", clients.OrderBy(c => c.Name));
+            ClientsViewModel model = new ClientsViewModel
+            {
+                Clients = clients.OrderBy(c => c.Name)
+            };
+
+            return View("Index", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(ClientsViewModel model)
+        {
+            ClientsViewModel outputModel = new ClientsViewModel();
+
+            IEnumerable<Client> clients = await this._clientRepo.GetAll();
+
+            if (string.IsNullOrWhiteSpace(model.Query))
+            {
+                outputModel.Clients = clients;
+
+                return RedirectToAction("Index", "Clients");
+            }
+
+            IEnumerable<Client> filteredClients = clients.Where(c =>
+                c.Name.ToLower().Contains(model.Query.ToLower()) ||
+                c.Surname.ToLower().Contains(model.Query.ToLower()));
+
+            outputModel.Clients = filteredClients;
+            outputModel.Query = model.Query;
+
+            return View("Index", outputModel);
         }
 
         public async Task<IActionResult> Details(int id)
