@@ -75,7 +75,7 @@ namespace AddressBook
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Mvc}/{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{area=Mvc}/{controller=Dashboard}/{action=Index}/{Id:int?}");
             });
         }
     }

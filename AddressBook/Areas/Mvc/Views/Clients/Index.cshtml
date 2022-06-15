@@ -61,8 +61,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            @*@await Component.InvokeAsync("ClientSearch")*@
-
             <form class="d-flex" method="post" enctype="multipart/form-data"
                 asp-controller="Clients"
                 asp-action="Search">
@@ -76,9 +74,6 @@
 
                 <button class="btn btn-outline-secondary me-2" type="submit">Export</button>
                 <a class="btn btn-outline-secondary">Import</a>
-
-                @*<label for="inpImport" class="form-label">Import</label>
-            <input class="form-control form-control-lg" type="file" id="inpImport">*@
 
             </form>
 
@@ -148,7 +143,7 @@
                     <a class="btn btn-outline-primary btn-sm float-end" type="submit"
                        asp-controller="Clients"
                        asp-action="Details"
-                       asp-route-id="@client.Id">
+                       asp-route-Id="@client.Id">
 
                         Edit
 
