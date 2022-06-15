@@ -22,40 +22,36 @@ namespace AddressBook.Areas.Mvc.Controllers
             this._mapper = mapper;
         }
 
-        public async Task<ViewResult> Index()
-        {
-            IEnumerable<Client> clients = await this._clientRepo.GetAll();
-
-            ClientsViewModel model = new ClientsViewModel
-            {
-                Clients = clients.OrderBy(c => c.Name)
-            };
-
-            return View("Index", model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Search(ClientsViewModel model)
+        public async Task<ViewResult> Index(string Query)
         {
             ClientsViewModel outputModel = new ClientsViewModel();
 
             IEnumerable<Client> clients = await this._clientRepo.GetAll();
 
-            if (string.IsNullOrWhiteSpace(model.Query))
+            if (string.IsNullOrWhiteSpace(Query))
             {
                 outputModel.Clients = clients;
 
-                return RedirectToAction("Index", "Clients");
+                return View("Index", outputModel);
             }
 
             IEnumerable<Client> filteredClients = clients.Where(c =>
-                c.Name.ToLower().Contains(model.Query.ToLower()) ||
-                c.Surname.ToLower().Contains(model.Query.ToLower()));
+                c.Name.ToLower().Contains(Query.ToLower()) ||
+                c.Surname.ToLower().Contains(Query.ToLower()));
 
             outputModel.Clients = filteredClients;
-            outputModel.Query = model.Query;
+            outputModel.Query = Query;
 
             return View("Index", outputModel);
+        }
+
+        [HttpPost]
+        public IActionResult Search(ClientsViewModel model)
+        {
+            if (string.IsNullOrWhiteSpace(model.Query))
+                return RedirectToAction("Index", "Clients");
+
+            return RedirectToAction("Index", "Clients", new { Query = model.Query });
         }
 
         public async Task<IActionResult> Details(int id)
