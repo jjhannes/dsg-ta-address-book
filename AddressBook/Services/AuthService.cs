@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace AddressBook.Api.Services
+namespace AddressBook.Services
 {
     public class AuthService
     {

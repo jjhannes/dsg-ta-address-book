@@ -1,6 +1,5 @@
 using AddressBook.Data;
 using AddressBook.Api.Middelware;
-using AddressBook.Api.Services;
 using AddressBook.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using AddressBook.Services;
 
 namespace AddressBook
 {
@@ -35,6 +35,7 @@ namespace AddressBook
 
             services.AddHttpContextAccessor();
             services.AddSession();
+            //services.AddScoped(options => UserSession.CreateSession(options));
 
             services.AddCors();
 
@@ -58,9 +59,10 @@ namespace AddressBook
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseCors(x => x
                 .AllowAnyOrigin()
@@ -75,7 +77,7 @@ namespace AddressBook
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Mvc}/{controller=Dashboard}/{action=Index}/{Id:int?}");
+                    pattern: "{area=Mvc}/{controller=Login}/{action=Index}/{Id:int?}");
             });
         }
     }

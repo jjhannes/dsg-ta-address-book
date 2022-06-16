@@ -56,16 +56,27 @@ namespace AddressBook.Areas.Mvc.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            Client client = await this._clientRepo.GetById(id);
-
-            if (client == null)
+            try
             {
-                // User could not be found; redirect to the list to refresh
-                // TODO: Implement some message
+                Client client = await this._clientRepo.GetById(id);
+
+                if (client == null)
+                {
+                    // User could not be found; redirect to the list to refresh
+                    // TODO: Implement some message
+                    // OPTION: Use controller [TempData]?
+                    return RedirectToAction("Index");
+                }
+
+                return View("Details", client);
+            }
+            catch (Exception)
+            {
+                // Log?
+                // Display error on page?
+                // OPTION: Use controller [TempData]?
                 return RedirectToAction("Index");
             }
-
-            return View("Details", client);
         }
 
         [HttpPost]
@@ -89,12 +100,14 @@ namespace AddressBook.Areas.Mvc.Controllers
 
                 // There was a problem saving
                 // TODO: Implement a message
+                // OPTION: Use controller [TempData]?
                 return RedirectToAction("Details", new { id = client.Id });
             }
             catch (Exception)
             {
                 // Log?
                 // Display error on page?
+                // OPTION: Use controller [TempData]?
                 return RedirectToAction("Details", new { id = client.Id });
             }
         }
