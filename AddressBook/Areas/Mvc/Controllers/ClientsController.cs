@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChoETL;
 
 namespace AddressBook.Areas.Mvc.Controllers
 {
@@ -141,5 +142,17 @@ namespace AddressBook.Areas.Mvc.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        //public async Task<IActionResult> Export()
+        //{
+        //    return await Task.Run(() => View());
+        //}
+
+        //public async Task<IActionResult> Import()
+        //{
+        //    ChoCSVReader reader = new ChoCSVReader();
+
+        //    return await Task.Run(() => View());
+        //}
     }
 }
